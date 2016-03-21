@@ -15,10 +15,16 @@ namespace MVC_work_1.Controllers
         private 客戶資料Entities db = new 客戶資料Entities();
 
         // GET: 客戶資料
-        public ActionResult Index()
+        public ActionResult Index(string keyWord)
         {
-            return View(db.客戶資料.ToList());
-        }
+			var data= db.客戶資料.Where(p => p.是否已刪除 == false).AsQueryable();
+			if (!String.IsNullOrEmpty(keyWord))
+			{
+				data = data.Where(p => p.客戶名稱.Contains(keyWord));
+			}
+
+			return View(data.ToList());
+		}
 
         // GET: 客戶資料/Details/5
         public ActionResult Details(int? id)
@@ -110,8 +116,9 @@ namespace MVC_work_1.Controllers
         public ActionResult DeleteConfirmed(int id)
         {
             客戶資料 客戶資料 = db.客戶資料.Find(id);
-            db.客戶資料.Remove(客戶資料);
-            db.SaveChanges();
+			//db.客戶資料.Remove(客戶資料);
+			客戶資料.是否已刪除 = true;
+			db.SaveChanges();
             return RedirectToAction("Index");
         }
 

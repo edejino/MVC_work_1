@@ -15,11 +15,15 @@ namespace MVC_work_1.Controllers
         private 客戶資料Entities db = new 客戶資料Entities();
 
         // GET: 客戶聯絡人
-        public ActionResult Index()
+        public ActionResult Index(string keyWord)
         {
-            var 客戶聯絡人 = db.客戶聯絡人.Include(客 => 客.客戶資料);
-            return View(客戶聯絡人.ToList());
-        }
+            var 客戶聯絡人 = db.客戶聯絡人.Where(p => p.是否已刪除 == false).Include(客 => 客.客戶資料);
+			if (!String.IsNullOrEmpty(keyWord))
+			{
+				客戶聯絡人 = 客戶聯絡人.Where(p => p.姓名.Contains(keyWord) || p.職稱.Contains(keyWord) || p.Email.Contains(keyWord));
+			}
+			return View(客戶聯絡人.ToList());
+		}
 
         // GET: 客戶聯絡人/Details/5
         public ActionResult Details(int? id)
@@ -115,8 +119,9 @@ namespace MVC_work_1.Controllers
         public ActionResult DeleteConfirmed(int id)
         {
             客戶聯絡人 客戶聯絡人 = db.客戶聯絡人.Find(id);
-            db.客戶聯絡人.Remove(客戶聯絡人);
-            db.SaveChanges();
+			//db.客戶聯絡人.Remove(客戶聯絡人);
+			客戶聯絡人.是否已刪除 = true;
+			db.SaveChanges();
             return RedirectToAction("Index");
         }
 

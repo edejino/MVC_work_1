@@ -9,10 +9,10 @@
 
 namespace MVC_work_1.Models
 {
-	using System;
-	using System.Collections.Generic;
-	using System.ComponentModel.DataAnnotations;
-	public partial class 客戶資料
+    using System;
+    using System.Collections.Generic;
+    
+    public partial class 客戶資料
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public 客戶資料()
@@ -22,12 +22,13 @@ namespace MVC_work_1.Models
         }
     
         public int Id { get; set; }
-		public string 客戶名稱 { get; set; }
-		public string 統一編號 { get; set; }
-		public string 電話 { get; set; }
-		public string 傳真 { get; set; }
-		public string 地址 { get; set; }
-		public string Email { get; set; }
+        public string 客戶名稱 { get; set; }
+        public string 統一編號 { get; set; }
+        public string 電話 { get; set; }
+        public string 傳真 { get; set; }
+        public string 地址 { get; set; }
+        public string Email { get; set; }
+        public bool 是否已刪除 { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<客戶銀行資訊> 客戶銀行資訊 { get; set; }
