@@ -20,7 +20,10 @@ namespace MVC_work_1.Controllers
             var 客戶銀行資訊 = db.客戶銀行資訊.Where(p => p.是否已刪除 == false).Include(客 => 客.客戶資料);
 			if (!String.IsNullOrEmpty(keyWord))
 			{
-				客戶銀行資訊 = 客戶銀行資訊.Where(p => p.銀行名稱.Contains(keyWord) || p.帳戶名稱.Contains(keyWord));
+				客戶銀行資訊 = 客戶銀行資訊.Where(p => p.帳戶名稱.Contains(keyWord)
+					|| p.分行代碼.ToString().Contains(keyWord) || p.帳戶號碼.Contains(keyWord)
+					|| p.銀行代碼.ToString().Contains(keyWord) || p.銀行名稱.Contains(keyWord)
+					);
 			}
 
 			return View(客戶銀行資訊.ToList());

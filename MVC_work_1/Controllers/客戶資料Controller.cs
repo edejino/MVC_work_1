@@ -20,7 +20,10 @@ namespace MVC_work_1.Controllers
 			var data= db.客戶資料.Where(p => p.是否已刪除 == false).AsQueryable();
 			if (!String.IsNullOrEmpty(keyWord))
 			{
-				data = data.Where(p => p.客戶名稱.Contains(keyWord));
+				data = data.Where(p => p.客戶名稱.Contains(keyWord)
+					|| p.統一編號.Contains(keyWord) || p.電話.Contains(keyWord)
+					|| p.傳真.Contains(keyWord) || p.地址.Contains(keyWord)
+					|| p.Email.Contains(keyWord));
 			}
 
 			return View(data.ToList());
