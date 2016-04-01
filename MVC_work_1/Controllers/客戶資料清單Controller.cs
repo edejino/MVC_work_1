@@ -14,7 +14,7 @@ namespace MVC_work_1.Controllers
 		// GET: 客戶資料清單
 		public ActionResult Index()
         {
-			var data = db.客戶資料View;
+			var data = db.客戶清單;
 			return View(data);
 		}
     }
